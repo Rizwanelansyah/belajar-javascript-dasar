@@ -4,15 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter() Method</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        .loop{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            width: 100vw;
+            height: 30px;
+            background-color: green;
+            padding: 10px;
+            border: 2px solid grey;
+        }
+        .item:nth-child(even){
+            background-color: greenyellow;
+        }
+    </style>
 </head>
 <body>
+    <div>
+    <input type="number" name="value" id="value">
+    <button id="btn">show</button>
+    </div>
+    <ul id="loop"></ul>
 <script>
 
-    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const val = document.querySelector('#value');
+    const loop = document.querySelector('#loop');
+    const btn = document.querySelector('#btn');
 
-    const filteredArray = nums.filter(item => item % 2 === 0);
+    const nums = [
+        "Rizwan", "Hisyam", 
+        "Arie", "Agil", 
+        "Zaki", "Elansyah", 
+        "Yusron", "Fatur", 
+        "Nur Yaman", "Ginanjar",
+        "Arif", "Dewi",
+        "Yanto kata zaki", "haris kata zaki",
+        "siti kata zaki", "akbar",
+        "zilvani", "Toni kata zaki"
+    ];
 
-    document.write(filteredArray);
+    function showArray(filter){
+        loop.innerHTML = '';
+        const filteredArray = nums.filter(item => item.length >= filter);
+        filteredArray.forEach((num, idx) => {
+            loop.innerHTML += `<li class=\"item\">[${idx+1}] => ${num}</li>`;
+        });
+    }
+    val.onchange = e => {
+        btn.innerHTML = `cari nama dengan panjang nama yang lebih dari ${val.value}`
+    };
+    btn.onclick = e => {
+        showArray(val.value);
+    };
 
 </script>
 </body>
